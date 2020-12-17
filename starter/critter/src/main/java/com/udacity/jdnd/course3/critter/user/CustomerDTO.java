@@ -52,4 +52,15 @@ public class CustomerDTO {
     public void setPetIds(List<Long> petIds) {
         this.petIds = petIds;
     }
+
+    public CustomerDTO(long id, String name, String phoneNumber, String notes, List<Long> petIds) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.notes = notes;
+        this.petIds = petIds;
+    }
+
+    public CustomerDTO() {
+    }
 }

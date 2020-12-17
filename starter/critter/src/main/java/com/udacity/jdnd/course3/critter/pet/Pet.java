@@ -1,0 +1,96 @@
+package com.udacity.jdnd.course3.critter.pet;
+
+import com.udacity.jdnd.course3.critter.schedule.Schedule;
+import com.udacity.jdnd.course3.critter.user.Customer;
+import org.hibernate.annotations.Nationalized;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+
+@Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "Pet.getAllPets",
+                query = "select p from Pet p"
+        ),
+        @NamedQuery(
+                name = "Pet.getAllPetsByOwnerId",
+                query = "select p from Pet p where p.owner.id = :ownerId"
+        )
+})
+public class Pet implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    private PetType type;
+
+    @Nationalized
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Customer owner;
+
+    @ManyToOne
+    private Schedule schedulePets;
+
+    private LocalDate birthDate;
+
+    private String notes;
+
+    public Pet() {
+    }
+
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public PetType getType() {
+        return type;
+    }
+
+    public void setType(PetType type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Customer getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Customer owner) {
+        this.owner = owner;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+}
